@@ -5,7 +5,7 @@ bash <(curl -s https://raw.githubusercontent.com/aristosv/mediastack/master/medi
 
 Run the command above on a Raspbery Pi running Raspbian Stretch Lite, and you'll end up with Sonarr / Radarr / Jackett / Deluge installed in a containerized environment.
 
-This is how you can access all the software:
+This is how you can access all the web apps:
 
 ```
 Name: portainer
