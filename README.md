@@ -7,7 +7,7 @@ Run the command above on a Raspbery Pi running Raspbian Stretch Lite.
 
 It will install Deluge / Jackett / Plex / Portainer / Radarr / Sonarr, in a containerized environment.
 
-This is how you can access all the web apps:
+After the installation, this is how you can access all the web apps:
 
 ```
 Name: deluge
