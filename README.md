@@ -3,7 +3,8 @@ Sonarr / Radarr / Jackett / Deluge - Raspberry Pi installation script
 
 bash <(curl -s https://raw.githubusercontent.com/aristosv/mediastack/master/mediastack)
 
-Run the command above on a Raspbery Pi running Raspbian Stretch Lite, and you'll end up with Sonarr / Radarr / Jackett / Deluge installed in a containerized environment.
+Run the command above on a Raspbery Pi running Raspbian Stretch Lite.
+It will install Sonarr / Radarr / Jackett / Deluge in a containerized environment.
 
 This is how you can access all the web apps:
 
