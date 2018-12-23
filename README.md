@@ -1,5 +1,5 @@
 # mediastack
-Deluge / Jackett / Plex / Portainer / Radarr / Sonarr - Raspberry Pi installation script
+Deluge / Jackett / Plex / Portainer / Radarr / Sonarr - Raspberry Pi installation
 ```
 bash <(curl -s https://raw.githubusercontent.com/aristosv/mediastack/master/mediastack)
 ```
