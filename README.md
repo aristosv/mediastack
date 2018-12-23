@@ -1,11 +1,11 @@
 # mediastack
-Sonarr / Radarr / Jackett / Deluge - Raspberry Pi installation script
+Portainer / Sonarr / Radarr / Jackett / Deluge / Plex - Raspberry Pi installation script
 ```
 bash <(curl -s https://raw.githubusercontent.com/aristosv/mediastack/master/mediastack)
 ```
 Run the command above on a Raspbery Pi running Raspbian Stretch Lite.
 
-It will install Portainer / Sonarr / Radarr / Jackett / Deluge in a containerized environment.
+It will install Portainer / Sonarr / Radarr / Jackett / Deluge / Plex, in a containerized environment.
 
 This is how you can access all the web apps:
 
