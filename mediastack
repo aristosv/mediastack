@@ -1,0 +1,44 @@
+echo update
+sudo apt-get update
+
+echo upgrade
+sudo apt-get -y upgrade
+
+echo dist upgrade
+sudo apt-get -y dist-upgrade
+
+echo clean
+sudo apt-get clean
+
+echo remove default pi password warning
+sudo rm /etc/profile.d/sshpwd.sh
+
+echo hush login
+touch /home/pi/.hushlogin
+
+echo install docker
+curl -sSL https://get.docker.com | sudo sh
+
+echo add containers user
+sudo adduser --disabled-password --gecos "" containers ; echo containers:containers | sudo chpasswd
+
+echo add containers user to docker group
+sudo usermod -aG docker containers
+
+echo create media folders
+sudo mkdir -p /media/{downloads,tvshows,movies}
+
+echo install portainer
+sudo docker run -d --restart always --name portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data portainer/portainer
+
+echo install sonarr
+sudo docker run -d --restart always --name sonarr -p 8989:8989 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v sonarr:/config -v /media/tvshows:/tv -v /media/downloads:/downloads lsioarmhf/sonarr
+
+echo install radarr
+sudo docker run -d --restart always --name radarr -p 7878:7878 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v radarr:/config -v /media/movies:/movies -v /media/downloads:/downloads lsioarmhf/radarr
+
+echo install jackett
+sudo docker run -d --restart always --name=jackett -p 9117:9117 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v jackett:/config -v /media/downloads:/downloads lsioarmhf/jackett
+
+echo install deluge
+sudo docker run -d --restart always --name deluge -p 8112:8112 -p 58846:58846 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v deluge:/config -v /media/downloads:/downloads lsioarmhf/deluge
