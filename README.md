@@ -7,27 +7,28 @@ Run the command above on a Raspbery Pi running Raspbian Stretch Lite, and you'll
 
 This is how you can access all the software:
 
-- Name: portainer
-- Usage: docker container management
-- URL: http://*:9000
-
-
-- Name: sonarr
-- Usage: download tv shows
-- URL: http://*:8989
-
-
-- Name: radarr
-- Usage: download movies
-- URL: http://*:7878
-
-
-- Name: jackett
-- Usage: api torrent tracker
-- URL: http://*:9117
-
-
-- Name: deluge
-- Usage: download manager
-- URL: http://*:8112
-- Pass: deluge
+```
+Name: portainer
+Usage: docker container management
+URL: http://*:9000
+```
+```
+Name: sonarr
+Usage: download tv shows
+URL: http://*:8989
+```
+```
+Name: radarr
+Usage: download movies
+URL: http://*:7878
+```
+```
+Name: jackett
+Usage: api torrent tracker
+URL: http://*:9117
+```
+```
+Name: deluge
+Usage: download manager
+URL: http://*:8112
+Pass: deluge
