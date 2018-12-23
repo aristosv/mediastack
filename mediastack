@@ -37,6 +37,9 @@ sudo docker run -d --restart always --name sonarr -p 8989:8989 -e PUID=1001 -e P
 echo install radarr
 sudo docker run -d --restart always --name radarr -p 7878:7878 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v radarr:/config -v /media/movies:/movies -v /media/downloads:/downloads lsioarmhf/radarr
 
+echo install plex server
+sudo docker run -d --restart always --name plex --net=host -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v plex:/config -v /media/tvshows:/tvshows -v /media/movies:/movies -v plex:/transcode lsioarmhf/plex
+
 echo install jackett
 sudo docker run -d --restart always --name=jackett -p 9117:9117 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v jackett:/config -v /media/downloads:/downloads lsioarmhf/jackett
 
