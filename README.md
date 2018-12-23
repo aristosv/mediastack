@@ -35,3 +35,8 @@ Usage: download manager
 URL: http://<your_pi_ip_here>:8112
 Pass: deluge
 ```
+```
+Name: plex
+Usage: plex media server
+URL: http://<your_pi_ip_here>:32400/web
+```
