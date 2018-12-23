@@ -10,25 +10,26 @@ This is how you can access all the software:
 ```
 Name: portainer
 Usage: docker container management
-URL: http://*:9000
+URL: http://<your_pi_ip_here>:9000
 ```
 ```
 Name: sonarr
 Usage: download tv shows
-URL: http://*:8989
+URL: http://<your_pi_ip_here>:8989
 ```
 ```
 Name: radarr
 Usage: download movies
-URL: http://*:7878
+URL: http://<your_pi_ip_here>:7878
 ```
 ```
 Name: jackett
 Usage: api torrent tracker
-URL: http://*:9117
+URL: http://<your_pi_ip_here>:9117
 ```
 ```
 Name: deluge
 Usage: download manager
-URL: http://*:8112
+URL: http://<your_pi_ip_here>:8112
 Pass: deluge
+```
