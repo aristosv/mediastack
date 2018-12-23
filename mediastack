@@ -28,20 +28,20 @@ sudo usermod -aG docker containers
 echo create media folders
 sudo mkdir -p /media/{downloads,tvshows,movies}
 
-echo install portainer
-sudo docker run -d --restart always --name portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data portainer/portainer
-
-echo install sonarr
-sudo docker run -d --restart always --name sonarr -p 8989:8989 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v sonarr:/config -v /media/tvshows:/tv -v /media/downloads:/downloads lsioarmhf/sonarr
-
-echo install radarr
-sudo docker run -d --restart always --name radarr -p 7878:7878 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v radarr:/config -v /media/movies:/movies -v /media/downloads:/downloads lsioarmhf/radarr
-
-echo install plex server
-sudo docker run -d --restart always --name plex --net=host -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v plex:/config -v /media/tvshows:/tvshows -v /media/movies:/movies -v plex:/transcode lsioarmhf/plex
+echo install deluge
+sudo docker run -d --restart always --name deluge -p 8112:8112 -p 58846:58846 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v deluge:/config -v /media/downloads:/downloads lsioarmhf/deluge
 
 echo install jackett
 sudo docker run -d --restart always --name=jackett -p 9117:9117 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v jackett:/config -v /media/downloads:/downloads lsioarmhf/jackett
 
-echo install deluge
-sudo docker run -d --restart always --name deluge -p 8112:8112 -p 58846:58846 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v deluge:/config -v /media/downloads:/downloads lsioarmhf/deluge
+echo install plex
+sudo docker run -d --restart always --name plex --net=host -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v plex:/config -v /media/tvshows:/tvshows -v /media/movies:/movies -v plex:/transcode lsioarmhf/plex
+
+echo install portainer
+sudo docker run -d --restart always --name portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data portainer/portainer
+
+echo install radarr
+sudo docker run -d --restart always --name radarr -p 7878:7878 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v radarr:/config -v /media/movies:/movies -v /media/downloads:/downloads lsioarmhf/radarr
+
+echo install sonarr
+sudo docker run -d --restart always --name sonarr -p 8989:8989 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v sonarr:/config -v /media/tvshows:/tv -v /media/downloads:/downloads lsioarmhf/sonarr
