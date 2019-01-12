@@ -1,7 +1,7 @@
 # mediastack
 Deluge / Jackett / Plex / Portainer / Radarr / Sonarr - Raspberry Pi installation
 ```
-bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/mediastack/master/mediastack)
+bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/mediastack-raspberrypi/master/mediastack)
 ```
 Run the command above on a Raspbery Pi running Raspbian Stretch Lite.
 
