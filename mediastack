@@ -44,4 +44,4 @@ echo install radarr
 sudo docker run -d --restart always --name radarr -p 7878:7878 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v radarr:/config -v /media/movies:/movies -v /media/downloads:/downloads lsioarmhf/radarr
 
 echo install sonarr
-sudo docker run -d --restart always --name sonarr -p 8989:8989 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v sonarr:/config -v /media/tvshows:/tv -v /media/downloads:/downloads lsioarmhf/sonarr
+sudo docker run -d --restart always --name sonarr -p 8989:8989 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v sonarr:/config -v /media/tvshows:/tvshows -v /media/downloads:/downloads lsioarmhf/sonarr
