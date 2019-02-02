@@ -1,14 +1,14 @@
 echo update
-sudo apt-get update
+sudo apt-get update > /dev/null 2>&1
 
 echo upgrade
-sudo apt-get -y upgrade
+sudo apt-get -y upgrade > /dev/null 2>&1
 
 echo dist upgrade
-sudo apt-get -y dist-upgrade
+sudo apt-get -y dist-upgrade > /dev/null 2>&1
 
 echo clean
-sudo apt-get clean
+sudo apt-get clean > /dev/null 2>&1
 
 echo remove default pi password warning
 sudo rm /etc/profile.d/sshpwd.sh
@@ -17,31 +17,33 @@ echo hush login
 touch /home/pi/.hushlogin
 
 echo install docker
-curl -sSL https://get.docker.com | sudo sh
+curl -sSL https://get.docker.com | sudo sh > /dev/null 2>&1
 
 echo add containers user
-sudo adduser --disabled-password --gecos "" containers ; echo containers:containers | sudo chpasswd
+sudo adduser --disabled-password --gecos "" containers ; echo containers:containers | sudo chpasswd > /dev/null 2>&1
 
 echo add containers user to docker group
-sudo usermod -aG docker containers
+sudo usermod -aG docker containers > /dev/null 2>&1
 
 echo create media folders
 sudo mkdir -p /media/{downloads,tvshows,movies}
 
 echo install deluge
-sudo docker run -d --restart always --name deluge -p 8112:8112 -p 58846:58846 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v deluge:/config -v /media/downloads:/downloads lsioarmhf/deluge
+sudo docker run -d --restart always --name deluge -p 8112:8112 -p 58846:58846 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v deluge:/config -v /media/downloads:/downloads lsioarmhf/deluge > /dev/null 2>&1
 
 echo install jackett
-sudo docker run -d --restart always --name=jackett -p 9117:9117 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v jackett:/config -v /media/downloads:/downloads lsioarmhf/jackett
+sudo docker run -d --restart always --name=jackett -p 9117:9117 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v jackett:/config -v /media/downloads:/downloads lsioarmhf/jackett > /dev/null 2>&1
 
 echo install plex
-sudo docker run -d --restart always --name plex --net=host -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v plex:/config -v /media/tvshows:/tvshows -v /media/movies:/movies -v plex:/transcode lsioarmhf/plex
+sudo docker run -d --restart always --name plex --net=host -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v plex:/config -v /media/tvshows:/tvshows -v /media/movies:/movies -v plex:/transcode lsioarmhf/plex > /dev/null 2>&1
 
 echo install portainer
-sudo docker run -d --restart always --name portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data portainer/portainer
+sudo docker run -d --restart always --name portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data portainer/portainer > /dev/null 2>&1
 
 echo install radarr
-sudo docker run -d --restart always --name radarr -p 7878:7878 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v radarr:/config -v /media/movies:/movies -v /media/downloads:/downloads lsioarmhf/radarr
+sudo docker run -d --restart always --name radarr -p 7878:7878 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v radarr:/config -v /media/movies:/movies -v /media/downloads:/downloads lsioarmhf/radarr > /dev/null 2>&1
 
 echo install sonarr
-sudo docker run -d --restart always --name sonarr -p 8989:8989 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v sonarr:/config -v /media/tvshows:/tvshows -v /media/downloads:/downloads lsioarmhf/sonarr
+sudo docker run -d --restart always --name sonarr -p 8989:8989 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v sonarr:/config -v /media/tvshows:/tvshows -v /media/downloads:/downloads lsioarmhf/sonarr > /dev/null 2>&1
+
+echo installation complete
