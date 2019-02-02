@@ -1,4 +1,4 @@
-# mediastack
+# mediastack-raspbian
 Deluge - Jackett - Plex - Portainer - Radarr - Sonarr
 ```
 bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/mediastack-raspbian/master/mediastack)
