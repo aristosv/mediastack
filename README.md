@@ -3,7 +3,7 @@ Deluge - Jackett - Plex - Portainer - Radarr - Sonarr
 
 Run the command below on a Debian machine.
 ```
-bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/mediastack-raspbian/master/mediastack)
+bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/mediastack/master/mediastack)
 ```
 It will install Deluge / Jackett / Plex / Portainer / Radarr / Sonarr, in a containerized environment.
 
