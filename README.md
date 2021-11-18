@@ -1,5 +1,5 @@
 # mediastack
-Deluge - Jackett - Plex - Portainer - Radarr - Sonarr
+Bazarr - Deluge - Jackett - Plex - Portainer - Radarr - Sonarr
 
 Run the command below on a Debian machine.
 ```
