@@ -5,9 +5,15 @@ Run the command below on a Debian machine.
 ```
 bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/mediastack/master/mediastack)
 ```
-It will install Deluge / Jackett / Plex / Portainer / Radarr / Sonarr, in a containerized environment.
+It will install Bazarr / Deluge / Jackett / Plex / Portainer / Radarr / Sonarr, in a containerized environment.
 
 After the installation, this is how you can access all the web apps:
+```
+Name: bazarr
+Usage: subtitle downloader
+URL: http://<your_pi_ip_here>:6767
+Pass: 
+```
 ```
 Name: deluge
 Usage: download manager
