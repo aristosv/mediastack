@@ -1,7 +1,7 @@
 # mediastack-raspbian
 Deluge - Jackett - Plex - Portainer - Radarr - Sonarr
 
-Run the command below on a Raspbery Pi running Raspbian Stretch Lite.
+Run the command below on a Debian machine.
 ```
 bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/mediastack-raspbian/master/mediastack)
 ```
