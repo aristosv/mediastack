@@ -1,51 +1,46 @@
-#!/bin/bash
+echo updating repositories
+apt update > /dev/null 2>&1
 
-echo update
-sudo apt-get update > /dev/null 2>&1
+echo upgrading packages
+apt -y upgrade > /dev/null 2>&1
 
-echo upgrade
-sudo apt-get -y upgrade > /dev/null 2>&1
+echo installing dependencies
+apt install -y curl > /dev/null 2>&1
 
-echo dist upgrade
-sudo apt-get -y dist-upgrade > /dev/null 2>&1
+echo installing docker
+curl -fsSL get.docker.com -o get-docker.sh ; sh get-docker.sh > /dev/null 2>&1
 
-echo clean
-sudo apt-get clean > /dev/null 2>&1
+echo creating containers user
+adduser --disabled-password --gecos "" containers ; echo containers:containers | chpasswd > /dev/null 2>&1
 
-echo remove default pi password warning
-sudo rm /etc/profile.d/sshpwd.sh
+echo adding containers user to docker group
+usermod -aG docker containers > /dev/null 2>&1
 
-echo hush login
-touch /home/pi/.hushlogin
+echo creating media folders
+mkdir -p /media/{downloads,tv,movies}
 
-echo install docker
-curl -sSL https://get.docker.com | sudo sh > /dev/null 2>&1
+echo setting directory permissions
+chown containers:containers /media/{downloads,tv,movies}
 
-echo add containers user
-sudo adduser --disabled-password --gecos "" containers ; echo containers:containers | sudo chpasswd > /dev/null 2>&1
+echo installing bazarr
+docker run -d --restart always --name bazarr -h bazarr -p 6767:6767 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v bazarr:/config -v /media/movies:/movies -v /media/tv:/tv lscr.io/linuxserver/bazarr > /dev/null 2>&1
 
-echo add containers user to docker group
-sudo usermod -aG docker containers > /dev/null 2>&1
+echo installing deluge
+docker run -d --restart always --name deluge -h deluge -p 8112:8112 -p 58846:58846 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v deluge:/config -v /media/downloads:/downloads lscr.io/linuxserver/deluge > /dev/null 2>&1
 
-echo create media folders
-sudo mkdir -p /media/{downloads,tvshows,movies}
+echo installing jackett
+docker run -d --restart always --name=jackett -h jackett -p 9117:9117 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v jackett:/config -v jackett:/downloads lscr.io/linuxserver/jackett > /dev/null 2>&1
 
-echo install deluge
-sudo docker run -d --restart always --name deluge -p 8112:8112 -p 58846:58846 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v deluge:/config -v /media/downloads:/downloads lsioarmhf/deluge > /dev/null 2>&1
+echo installing plex
+docker run -d --restart always --name=plex -h plex --net=host -e VERSION=latest -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v plex:/config -v /media/tv:/tv -v /media/movies:/movies -v plex:/transcode lscr.io/linuxserver/plex > /dev/null 2>&1
 
-echo install jackett
-sudo docker run -d --restart always --name=jackett -p 9117:9117 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v jackett:/config -v /media/downloads:/downloads lsioarmhf/jackett > /dev/null 2>&1
+echo installing portainer
+docker run -d --restart always --name portainer -h portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data portainer/portainer-ce > /dev/null 2>&1
 
-echo install plex
-sudo docker run -d --restart always --name plex --net=host -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v plex:/config -v /media/tvshows:/tvshows -v /media/movies:/movies -v plex:/transcode lsioarmhf/plex > /dev/null 2>&1
+echo installing radarr
+docker run -d --restart always --name radarr -h radarr -p 7878:7878 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v radarr:/config -v /media/movies:/movies -v /media/downloads:/downloads lscr.io/linuxserver/radarr > /dev/null 2>&1
 
-echo install portainer
-sudo docker run -d --restart always --name portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data portainer/portainer > /dev/null 2>&1
-
-echo install radarr
-sudo docker run -d --restart always --name radarr -p 7878:7878 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v radarr:/config -v /media/movies:/movies -v /media/downloads:/downloads lsioarmhf/radarr > /dev/null 2>&1
-
-echo install sonarr
-sudo docker run -d --restart always --name sonarr -p 8989:8989 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v sonarr:/config -v /media/tvshows:/tvshows -v /media/downloads:/downloads lsioarmhf/sonarr > /dev/null 2>&1
+echo installing sonarr
+docker run -d --restart always --name sonarr -h sonarr -p 8989:8989 -e PUID=1001 -e PGID=1001 -e TZ=Asia/Nicosia -v sonarr:/config -v /media/tv:/tv -v /media/downloads:/downloads lscr.io/linuxserver/sonarr > /dev/null 2>&1
 
 echo installation complete
