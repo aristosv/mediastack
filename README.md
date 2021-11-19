@@ -44,3 +44,4 @@ Name: sonarr
 Usage: download tv shows
 URL: http://<your_pi_ip_here>:8989
 ```
+Keep in mind, you'll still have to configure all these apps to talk to each other.
