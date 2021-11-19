@@ -16,7 +16,7 @@ adduser --disabled-password --gecos "" containers ; echo containers:containers |
 echo adding containers user to docker group
 usermod -aG docker containers > /dev/null 2>&1
 
-echo creating media folders
+echo creating media directories
 mkdir -p /media/{downloads,tv,movies}
 
 echo setting directory permissions
