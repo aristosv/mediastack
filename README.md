@@ -37,7 +37,7 @@ URL: http://<your_ip_here>:9000
 ```
 Name: radarr
 Usage: download movies
-URL: http://<your_pi_ip_here>:7878
+URL: http://<your_ip_here>:7878
 ```
 ```
 Name: sonarr
