@@ -1,7 +1,7 @@
 # mediastack
 Bazarr - Deluge - Jackett - Plex - Portainer - Radarr - Sonarr
 
-Run the command below on a Debian machine. Should also work on Raspberry Pi OS.
+Run the command below on a clean, minimal installation of Debian. Should also work on Raspberry Pi OS.
 ```
 bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/mediastack/master/mediastack)
 ```
