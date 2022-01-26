@@ -5,7 +5,7 @@ Run the command below on a minimal installation of Debian. Should also work on R
 ```
 bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/mediastack/master/mediastack)
 ```
-It will install Bazarr / Deluge / Jackett / Plex / Portainer / Radarr / Sonarr, in a containerized environment.
+It will install Bazarr / Deluge / Jackett / Plex / Portainer / Radarr / Sonarr in a containerized environment.
 
 After the installation this is how you can access all the web apps:
 ```
