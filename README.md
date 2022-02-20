@@ -3,7 +3,7 @@ Bazarr - Deluge - Jackett - Plex - Portainer - Radarr - Sonarr
 
 Run the command below on a minimal installation of Debian. Should also work on Raspberry Pi OS.
 ```
-bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/mediastack/master/mediastack)
+bash <(wget -qO- https://raw.githubusercontent.com/aristosv/mediastack/master/mediastack)
 ```
 It will install Bazarr / Deluge / Jackett / Plex / Portainer / Radarr / Sonarr in a containerized environment.
 
