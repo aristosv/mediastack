@@ -1,0 +1,171 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    hostname: portainer
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Nicosia
+    networks:
+      - network
+    ports:
+      - 9000:9000
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer:/data
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    hostname: radarr
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Nicosia
+    networks:
+      - network
+    ports:
+      - 7878:7878
+    restart: always
+    volumes:
+      - radarr:/config
+      - /mnt:/mnt:rshared
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    hostname: sonarr
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Nicosia
+    networks:
+      - network
+    ports:
+      - 8989:8989
+    restart: always
+    volumes:
+      - sonarr:/config
+      - /mnt:/mnt:rshared
+
+  rdtclient:
+    image: rogerfar/rdtclient
+    container_name: rdtclient
+    hostname: rdtclient
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Nicosia
+    networks:
+      - network
+    ports:
+      - 6500:6500
+    restart: always
+    volumes:
+      - rdtclient:/data/db
+      - /mnt:/mnt:rshared
+
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    hostname: overseerr
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Nicosia
+    networks:
+      - network
+    ports:
+      - 5055:5055
+    restart: always
+    volumes:
+      - overseerr:/config
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    hostname: prowlarr
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Nicosia
+    networks:
+      - network
+    ports:
+      - 9696:9696
+    restart: always
+    volumes:
+      - prowlarr:/config
+
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    hostname: plex
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Nicosia
+    network_mode: host
+    restart: always
+    volumes:
+      - plex:/config
+      - /mnt:/mnt:rshared
+
+  zurg:
+    image: ghcr.io/debridmediamanager/zurg-testing:latest
+    container_name: zurg
+    hostname: zurg
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Nicosia
+    networks:
+      - network
+    ports:
+      - 9999:9999
+    restart: always
+    volumes:
+      - zurg:/app/data
+      - /var/lib/docker/volumes/zurg/_data/app/config.yml:/app/config.yml
+      - /var/lib/docker/volumes/zurg/_data/app/plex_update.sh:/app/plex_update.sh
+
+  rclone:
+    image: rclone/rclone:latest
+    container_name: rclone
+    hostname: rclone
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/Nicosia
+    networks:
+      - network
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor=unconfined
+    devices:
+      - /dev/fuse:/dev/fuse:rwm
+    volumes:
+      - rclone:/config/rclone
+      - /mnt:/mnt:rshared
+      - /var/lib/docker/volumes/rclone/_data/rclone.conf:/config/rclone/rclone.conf
+    links:
+      - zurg
+    command: "mount zurg: /mnt/realdebrid --allow-other --allow-non-empty --dir-cache-time 10s --vfs-cache-mode full"
+    restart: always
+
+networks:
+  network:
+
+volumes:
+  portainer:
+  radarr:
+  sonarr:
+  rdtclient:
+  overseerr:
+  prowlarr:
+  plex:
+  zurg:
+  rclone:
