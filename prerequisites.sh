@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo Plex Token ; read plex_token ; export plex_token
+echo Debrid Token ; read debrid_token ; export debrid_token
+
 # update
 echo "updating system..."
 commands=("apt update; apt -y upgrade; apt dist-upgrade; apt -y autoclean; apt -y autoremove")
