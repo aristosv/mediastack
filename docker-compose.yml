@@ -128,8 +128,8 @@ services:
     restart: always
     volumes:
       - zurg:/app/data
-      - /var/lib/docker/volumes/zurg/_data/app/config.yml:/app/config.yml
-      - /var/lib/docker/volumes/zurg/_data/app/plex_update.sh:/app/plex_update.sh
+      - /var/lib/docker/volumes/root_zurg/_data/app/config.yml:/app/config.yml
+      - /var/lib/docker/volumes/root_zurg/_data/app/plex_update.sh:/app/plex_update.sh
 
   rclone:
     image: rclone/rclone:latest
@@ -150,7 +150,7 @@ services:
     volumes:
       - rclone:/config/rclone
       - /mnt:/mnt:rshared
-      - /var/lib/docker/volumes/rclone/_data/rclone.conf:/config/rclone/rclone.conf
+      - /var/lib/docker/volumes/root_rclone/_data/rclone.conf:/config/rclone/rclone.conf
     links:
       - zurg
     command: "mount zurg: /mnt/realdebrid --allow-other --allow-non-empty --dir-cache-time 10s --vfs-cache-mode full"
