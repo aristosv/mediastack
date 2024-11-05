@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo Plex Token ; read plex_token ; export plex_token
-echo Debrid Token ; read debrid_token ; export debrid_token
+echo enter plex token ; read plex_token ; export plex_token
+echo enter debrid token ; read debrid_token ; export debrid_token
 
 # update
 echo "updating system..."
