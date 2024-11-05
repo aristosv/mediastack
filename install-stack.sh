@@ -1,6 +1,5 @@
 #!/bin/bash
 
-echo enter plex token ; read plex_token ; export plex_token
 echo enter debrid token ; read debrid_token ; export debrid_token
 
 # update
@@ -93,7 +92,7 @@ cat << EOF > /var/lib/docker/volumes/root_zurg/_data/app/plex_update.sh
 #!/bin/bash
 
 plex_url="http://$ip_address:32400"
-token="$plex_token"
+token="BZwbLQybSYocwPPW9UQm"
 zurg_mount="/mnt/realdebrid"
 section_ids=\$(curl -sLX GET "\$plex_url/library/sections" -H "X-Plex-Token: \$token" | xmllint --xpath "//Directory/@key" - | grep -o 'key="[^"]*"' | awk -F'"' '{print \$2}')
 for arg in "\$@"
