@@ -34,3 +34,77 @@ usermod -aG docker containers > /dev/null 2>&1 || { echo "error adding user to d
 echo "creating directories..."
 mkdir -p /mnt/realdebrid /mnt/symlinks/downloads/complete/{radarr,sonarr}
 chown -R containers:containers /mnt/{realdebrid,symlinks/downloads/complete/{radarr,sonarr}}
+
+# config prowlarr
+echo "creating prowlarr configuration..."
+mkdir -p /var/lib/docker/volumes/root_prowlarr/_data/Definitions/Custom
+curl -s -o /var/lib/docker/volumes/root_prowlarr/_data/Definitions/Custom/torrentio.yml \
+https://raw.githubusercontent.com/dreulavelle/Prowlarr-Indexers/refs/heads/main/Custom/torrentio.yml
+
+# config rclone
+echo "creating rclone configuration..."
+mkdir -p /var/lib/docker/volumes/root_rclone/_data
+cat << EOF > /var/lib/docker/volumes/root_rclone/_data/rclone.conf
+[zurg]
+type = webdav
+url = http://zurg:9999/dav
+vendor = other
+pacer_min_sleep = 0
+
+[zurghttp]
+type = http
+url = http://zurg:9999/http
+no_head = false
+no_slash = false
+EOF
+
+# config zurg
+echo "creating zurg configuration..."
+mkdir -p /var/lib/docker/volumes/root_zurg/_data/app
+cat << EOF > /var/lib/docker/volumes/root_zurg/_data/app/config.yml
+zurg: v1
+token: $debrid_token
+check_for_changes_every_secs: 10
+enable_repair: true
+auto_delete_rar_torrents: true
+on_library_update: sh plex_update.sh "$@"
+directories:
+  shows:
+    group_order: 20
+    group: media
+    filters:
+      - has_episodes: true
+
+  movies:
+    group_order: 30
+    group: media
+    only_show_the_biggest_file: true
+    filters:
+      - regex: /.*/
+EOF
+
+# config plex update
+echo "creating plex update script..."
+ip_address=$(hostname -I | awk '{print $1}')
+cat << EOF > /var/lib/docker/volumes/root_zurg/_data/app/plex_update.sh
+#!/bin/bash
+
+plex_url="http://$ip_address:32400"
+token="$plex_token"
+zurg_mount="/mnt/realdebrid"
+section_ids=\$(curl -sLX GET "\$plex_url/library/sections" -H "X-Plex-Token: \$token" | xmllint --xpath "//Directory/@key" - | grep -o 'key="[^"]*"' | awk -F'"' '{print \$2}')
+for arg in "\$@"
+do
+    parsed_arg="\${arg//\\\\}"
+    echo \$parsed_arg
+    modified_arg="\$zurg_mount/\$parsed_arg"
+    echo "detected update on: \$arg"
+    echo "absolute path: \$modified_arg"
+    for section_id in \$section_ids
+    do
+        echo "Section ID: \$section_id"
+        curl -G -H "X-Plex-Token: \$token" --data-urlencode "path=\$modified_arg" \$plex_url/library/sections/\$section_id/refresh
+    done
+done
+echo "all updated sections refreshed"
+EOF
