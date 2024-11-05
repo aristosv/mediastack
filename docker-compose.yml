@@ -3,6 +3,7 @@ services:
     image: portainer/portainer-ce:latest
     container_name: portainer
     hostname: portainer
+	restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -10,7 +11,6 @@ services:
       - network
     ports:
       - 9000:9000
-    restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer:/data
@@ -19,6 +19,7 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     hostname: radarr
+	restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -26,7 +27,6 @@ services:
       - network
     ports:
       - 7878:7878
-    restart: always
     volumes:
       - radarr:/config
       - /mnt:/mnt:rshared
@@ -35,6 +35,7 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     hostname: sonarr
+	restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -42,7 +43,6 @@ services:
       - network
     ports:
       - 8989:8989
-    restart: always
     volumes:
       - sonarr:/config
       - /mnt:/mnt:rshared
@@ -51,6 +51,7 @@ services:
     image: rogerfar/rdtclient
     container_name: rdtclient
     hostname: rdtclient
+	restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -58,7 +59,6 @@ services:
       - network
     ports:
       - 6500:6500
-    restart: always
     volumes:
       - rdtclient:/data/db
       - /mnt:/mnt:rshared
@@ -67,6 +67,7 @@ services:
     image: lscr.io/linuxserver/overseerr:latest
     container_name: overseerr
     hostname: overseerr
+	restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -74,7 +75,6 @@ services:
       - network
     ports:
       - 5055:5055
-    restart: always
     volumes:
       - overseerr:/config
 
@@ -82,6 +82,7 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     hostname: prowlarr
+	restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -89,7 +90,6 @@ services:
       - network
     ports:
       - 9696:9696
-    restart: always
     volumes:
       - prowlarr:/config
 
@@ -97,11 +97,22 @@ services:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
     hostname: plex
+	restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
-    network_mode: host
-    restart: always
+    networks:
+      - network
+	ports:
+	  - 32400:32400
+      - 1900:1900/udp
+      - 5353:5353/udp
+      - 8324:8324
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+      - 32469:32469
     volumes:
       - plex:/config
       - /mnt:/mnt:rshared
@@ -110,6 +121,7 @@ services:
     image: ghcr.io/debridmediamanager/zurg-testing:latest
     container_name: zurg
     hostname: zurg
+	restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -117,7 +129,6 @@ services:
       - network
     ports:
       - 9999:9999
-    restart: always
     volumes:
       - zurg:/app/data
       - /var/lib/docker/volumes/root_zurg/_data/app/config.yml:/app/config.yml
@@ -127,6 +138,7 @@ services:
     image: rclone/rclone:latest
     container_name: rclone
     hostname: rclone
+	restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -145,7 +157,6 @@ services:
     links:
       - zurg
     command: "mount zurg: /mnt/realdebrid --allow-other --allow-non-empty --dir-cache-time 10s --vfs-cache-mode full"
-    restart: always
 
 networks:
   network:
