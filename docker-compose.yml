@@ -6,7 +6,6 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Nicosia
     networks:
       - network
     ports:
@@ -23,7 +22,6 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Nicosia
     networks:
       - network
     ports:
@@ -40,7 +38,6 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Nicosia
     networks:
       - network
     ports:
@@ -57,7 +54,6 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Nicosia
     networks:
       - network
     ports:
@@ -74,7 +70,6 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Nicosia
     networks:
       - network
     ports:
@@ -90,7 +85,6 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Nicosia
     networks:
       - network
     ports:
@@ -106,7 +100,6 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Nicosia
     network_mode: host
     restart: always
     volumes:
@@ -120,7 +113,6 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Nicosia
     networks:
       - network
     ports:
@@ -138,7 +130,6 @@ services:
     environment:
       - PUID=1001
       - PGID=1001
-      - TZ=Europe/Nicosia
     networks:
       - network
     cap_add:
