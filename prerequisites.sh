@@ -114,7 +114,7 @@ EOF
 
 # config plex server
 echo "creating plex configuration..."
-mkdir -p "/var/lib/docker/volumes/root_plex/_data/Library/Application Support/Plex Media Server/"
+mkdir -p "/var/lib/docker/volumes/root_plex/_data/Library/Application Support/Plex Media Server"
 cat << EOF > "/var/lib/docker/volumes/root_plex/_data/Library/Application Support/Plex Media Server/Preferences.xml"
 <?xml version="1.0" encoding="utf-8"?>
 <Preferences
