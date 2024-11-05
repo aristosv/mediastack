@@ -112,9 +112,10 @@ done
 echo "all updated sections refreshed"
 EOF
 
-# docker stack
-echo "downloading docker stack..."
+# stack
+echo "downloading stack..."
 curl -O https://raw.githubusercontent.com/aristosv/mediastack/refs/heads/master/docker-compose.yml
 
 # install
+echo "installing stack..."
 docker compose up -d
