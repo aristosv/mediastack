@@ -115,3 +115,6 @@ EOF
 # docker stack
 echo "downloading docker stack..."
 curl -O https://raw.githubusercontent.com/aristosv/mediastack/refs/heads/master/docker-compose.yml
+
+# install
+docker compose up -d
