@@ -3,7 +3,7 @@ services:
     image: portainer/portainer-ce:latest
     container_name: portainer
     hostname: portainer
-	restart: unless-stopped
+    restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -19,7 +19,7 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     hostname: radarr
-	restart: unless-stopped
+    restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -35,7 +35,7 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     hostname: sonarr
-	restart: unless-stopped
+    restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -51,7 +51,7 @@ services:
     image: rogerfar/rdtclient
     container_name: rdtclient
     hostname: rdtclient
-	restart: unless-stopped
+    restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -67,7 +67,7 @@ services:
     image: lscr.io/linuxserver/overseerr:latest
     container_name: overseerr
     hostname: overseerr
-	restart: unless-stopped
+    restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -82,7 +82,7 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     hostname: prowlarr
-	restart: unless-stopped
+    restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -97,7 +97,7 @@ services:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
     hostname: plex
-	restart: unless-stopped
+    restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -121,7 +121,7 @@ services:
     image: ghcr.io/debridmediamanager/zurg-testing:latest
     container_name: zurg
     hostname: zurg
-	restart: unless-stopped
+    restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
@@ -138,7 +138,7 @@ services:
     image: rclone/rclone:latest
     container_name: rclone
     hostname: rclone
-	restart: unless-stopped
+    restart: unless-stopped
     environment:
       - PUID=1001
       - PGID=1001
