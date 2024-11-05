@@ -112,6 +112,32 @@ done
 echo "all updated sections refreshed"
 EOF
 
+# config plex server
+echo "creating plex configuration..."
+mkdir -p "/var/lib/docker/volumes/root_plex/_data/Library/Application Support/Plex Media Server/"
+cat << EOF > "/var/lib/docker/volumes/root_plex/_data/Library/Application Support/Plex Media Server/Preferences.xml"
+<?xml version="1.0" encoding="utf-8"?>
+<Preferences
+    OldestPreviousVersion="1.41.1.9057-af5eaea7a"
+    MachineIdentifier="ebb4e524-43ec-424d-8f47-3cf8dd655cc7"
+    ProcessedMachineIdentifier="b8efdd1ed8a1a3bfd177542904548acd5cf3a0f7"
+    AnonymousMachineIdentifier="e7f537e9-b2af-4436-836c-95192964cb90"
+    MetricsEpoch="1"
+    AcceptedEULA="1"
+    GlobalMusicVideoPathMigrated="1"
+    PublishServerOnPlexOnlineKey="0"
+    PlexOnlineToken="BZwbLQybSYocwPPW9UQm"
+    PlexOnlineUsername="aristosv"
+    PlexOnlineMail="aristos@aristos.net"
+    CertificateUUID="550c510a3cb743af967965072b251bc0"
+    PubSubServer="139.162.215.242"
+    PubSubServerRegion="lhr"
+    PubSubServerPing="199"
+    CertificateVersion="3"
+    LanguageInCloud="1"
+/>
+EOF
+
 # stack
 echo "downloading stack..."
 curl -O https://raw.githubusercontent.com/aristosv/mediastack/refs/heads/master/docker-compose.yml
